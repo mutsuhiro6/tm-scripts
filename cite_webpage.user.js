@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Cite Webpage
 // @namespace    https://github.com/mutsuhiro6/tm-scripts
-// @version      1.0.1
+// @version      1.0.2
 // @description  Copy title and URL of showing webpage.
 // @author       mutsuhiro6
 // @updateURL    https://raw.githubusercontent.com/mutsuhiro6/tm-scripts/main/cite_webpage.user.js
@@ -25,13 +25,13 @@ function copyUrlAndTitle() {
     GM_notification({ title: 'Cited!', text: text, image: '', onclick: () => { } });
 }
 
-function bulkCopyFromHistories() {
-    const histories = GM_getValue(HISTORY_KEY, undefined);
+async function bulkCopyFromHistories() {
+    const histories = await GM_getValue(HISTORY_KEY, undefined);
     if (!histories || histories.length < 1) {
-        GM_notification({ title: 'History is empty.', text: '', image: '', onclick: () => { } });
+        GM_notification({ title: 'History is empty.', text: 'No content copied.', image: '', onclick: () => { } });
     } else {
         GM_setClipboard(Array.from(histories).map(h => h.content).join('\n'));
-        GM_notification({ title: 'Copied all history!', text: '', image: '', onclick: () => { } });
+        GM_notification({ title: 'Copied all history!', text: `${histories.length} webpages copied!`, image: '', onclick: () => { } });
     }
 }
 
