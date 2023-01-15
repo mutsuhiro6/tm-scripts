@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Cite Webpage
 // @namespace    https://github.com/mutsuhiro6/tm-scripts
-// @version      1.0.0
+// @version      1.0.1
 // @description  Copy title and URL of showing webpage.
 // @author       mutsuhiro6
 // @updateURL    https://raw.githubusercontent.com/mutsuhiro6/tm-scripts/main/cite_webpage.user.js
@@ -36,7 +36,7 @@ function bulkCopyFromHistories() {
 }
 
 async function updateHistory(content) {
-    const timestamp = new Date();
+    const timestamp = new Date().toJSON();
     const new_content = {
         timestamp: timestamp,
         content: content
@@ -56,7 +56,7 @@ async function updateHistory(content) {
     document.addEventListener('keydown', (event) => {
         // ctrl + l
         if (event.ctrlKey && event.key == 'l') { event.stopPropagation(); copyUrlAndTitle(); };
-        // ctrl + L
-        if (event.ctrlKey && event.key == 'L') { event.stopPropagation(); bulkCopyFromHistories(); };
+        // ctrl + x
+        if (event.ctrlKey && event.key == 'x') { event.stopPropagation(); bulkCopyFromHistories(); };
     });
 })();
