@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Cite Webpage
 // @namespace    https://github.com/mutsuhiro6/tm-scripts
-// @version      1.0.2
+// @version      1.1
 // @description  Copy title and URL of showing webpage.
 // @author       mutsuhiro6
 // @updateURL    https://raw.githubusercontent.com/mutsuhiro6/tm-scripts/main/cite_webpage.user.js
@@ -13,50 +13,38 @@
 // @grant        GM_getValue
 // ==/UserScript==
 
-const MAX_HISTORY_LENGTH = 10;
-const HISTORY_KEY = 'citation_history';
+const MAX_HISTORY_LENGTH = 20
+const HISTORY_KEY = 'citation_history'
 
 function copyUrlAndTitle() {
-    const url = location.href;
-    const title = document.title;
-    const text = '[] ' + title + ' - ' + url;
-    updateHistory(text);
-    GM_setClipboard(text);
-    GM_notification({ title: 'Cited!', text: text, image: '', onclick: () => { } });
-}
-
-async function bulkCopyFromHistories() {
-    const histories = await GM_getValue(HISTORY_KEY, undefined);
-    if (!histories || histories.length < 1) {
-        GM_notification({ title: 'History is empty.', text: 'No content copied.', image: '', onclick: () => { } });
-    } else {
-        GM_setClipboard(Array.from(histories).map(h => h.content).join('\n'));
-        GM_notification({ title: 'Copied all history!', text: `${histories.length} webpages copied!`, image: '', onclick: () => { } });
-    }
+    const url = location.href
+    const title = document.title
+    const text = title + ' - ' + url
+    updateHistory(text)
+    GM_setClipboard(text)
+    GM_notification({ title: 'Copied!', text: text, timeout: 1500 })
 }
 
 async function updateHistory(content) {
-    const timestamp = new Date().toJSON();
+    const timestamp = new Date().toJSON()
     const new_content = {
         timestamp: timestamp,
         content: content
     }
-    const histories = await GM_getValue(HISTORY_KEY, undefined);
+    const histories = await GM_getValue(HISTORY_KEY, undefined)
     if (!histories || histories.length < 1) {
-        GM_setValue(HISTORY_KEY, [new_content]);
+        GM_setValue(HISTORY_KEY, [new_content])
     } else {
-        histories.push(new_content);
-        if (histories.length > MAX_HISTORY_LENGTH) histories.shift();
-        GM_setValue(HISTORY_KEY, histories);
+        histories.push(new_content)
+        if (histories.length > MAX_HISTORY_LENGTH) histories.shift()
+        GM_setValue(HISTORY_KEY, histories)
     }
 }
 
-(function () {
-    'use strict';
-    document.addEventListener('keydown', (event) => {
+(() => {
+    'use strict'
+    document.addEventListener('keydown', (e) => {
         // ctrl + l
-        if (event.ctrlKey && event.key == 'l') { event.stopPropagation(); copyUrlAndTitle(); };
-        // ctrl + x
-        if (event.ctrlKey && event.key == 'x') { event.stopPropagation(); bulkCopyFromHistories(); };
-    });
-})();
+        if (e.ctrlKey && e.key == 'l') { e.stopPropagation(); copyUrlAndTitle() }
+    })
+})()
