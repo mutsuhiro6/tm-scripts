@@ -36,7 +36,7 @@ function gena(href, text) {
       url: url,
       onload: async (r) => {
         const elm = '<div class="row"><div class="col-12">Japanese Version: '
-          + (r.status == 200 ? gena(JP_OFFICIAL_URL, '🇯🇵') : 'Unavailable') + '</div></div>'
+          + (r.status == 200 ? gena(url, '🇯🇵') : 'Unavailable') + '</div></div>'
         document.querySelector('#pgContentWrap > div.row > div.col-md-6.mb-2').insertAdjacentHTML('beforeend', elm)
       }
     })
