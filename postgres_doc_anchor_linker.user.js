@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name         Postgres doc anchor linker
 // @namespace    https://github.com/mutsuhiro6/tm-scripts
-// @version      1.0
+// @version      1.1
 // @description  Cite anchor link of Postgres document.
 // @author       mutsuhiro6
-// @updateURL    https://raw.githubusercontent.com/mutsuhiro6/tm-scripts/main/cite_webpage.user.js
-// @downloadURL  https://raw.githubusercontent.com/mutsuhiro6/tm-scripts/main/cite_webpage.user.js
+// @updateURL    https://raw.githubusercontent.com/mutsuhiro6/tm-scripts/main/postgres_doc_anchor_linker.user.js
+// @downloadURL  https://raw.githubusercontent.com/mutsuhiro6/tm-scripts/main/postgres_doc_anchor_linker.user.js
 // @match        https://www.postgresql.jp/document/*
 // @match        https://www.postgresql.org/docs/*
 // @icon         https://icons.duckduckgo.com/ip2/www.postgresql.org.ico
