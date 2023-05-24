@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         PostgreSQL Document Localization Link
 // @namespace    https://github.com/mutsuhiro6/tm-scripts
-// @version      1.0
+// @version      1.1
 // @description  Add link to PostgreSQL JP-localized documents.
 // @author       mutsuhiro6
 // @icon         https://www.google.com/s2/favicons?domain=postgresql.org&sz=256
@@ -46,7 +46,7 @@ function gena(href, text) {
       method: 'HEAD',
       url: url,
       onload: async (r) => {
-        const elm = '"(" <span class="other">' + (r.status == 200 ? gena(url, '🐘') : 'Unavailable') + '</span> ")"'
+        const elm = '( <span class="other">' + (r.status == 200 ? gena(url, '🐘') : 'Unavailable') + '</span> )'
         document.querySelector('#docContent > div.versions > span.list').insertAdjacentHTML('afterbegin', elm)
       }
     })
