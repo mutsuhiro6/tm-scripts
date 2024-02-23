@@ -10,8 +10,9 @@
 // @match        https://www.postgresql.org/docs/*
 // @match        https://www.postgresql.jp/document/*
 // @grant        GM_xmlhttpRequest
-// @grant        GM_getValue
-// @grant        GM_setValue
+// @grant        GM_registerMenuCommand
+// @grant        GM_openInTab
+// @grant        GM_log
 // @connect      www.postgresql.org
 // @connect      www.postgresql.jp
 // ==/UserScript==
@@ -30,24 +31,35 @@ function gena(href, text) {
   const version = path[2] // current, 14...
   const file = path.slice(-1)[0] // history.html, index.html...
   if (location.host == 'www.postgresql.org') {
-    const url = 'https://www.postgresql.jp/document/' + version + '/html/' + file
+    const url = 'https://www.postgresql.jp/document/' + version + '/html/' + file + location.hash
     GM_xmlhttpRequest({
       method: 'HEAD',
       url: url,
       onload: async (r) => {
-        const elm = '<div class="row"><div class="col-12">Japanese Version: '
-          + (r.status == 200 ? gena(url, '🇯🇵') : 'Unavailable') + '</div></div>'
-        document.querySelector('#pgContentWrap > div.row > div.col-md-6.mb-2').insertAdjacentHTML('beforeend', elm)
+        if (r.status == 200) {
+          GM_log(url + ' is available.')
+          GM_registerMenuCommand('Move to JA', () => { GM_openInTab(url, { active: true, insert: true, setParent: true }) }, { accessKey: 'j' })
+          const elm = '<div class="row"><div class="col-12">Japanese Version: ' + gena(url, '🇯🇵') + '</div></div>'
+          document.querySelector('#pgContentWrap > div.row > div.col-md-6.mb-2').insertAdjacentHTML('beforeend', elm)
+        } else {
+          GM_log(url + ' is unavailable.')
+        }
       }
     })
   } else if (location.host == 'www.postgresql.jp') {
-    const url = 'https://www.postgresql.org/docs/' + version + '/' + file
+    const url = 'https://www.postgresql.org/docs/' + version + '/' + file + location.hash
     GM_xmlhttpRequest({
       method: 'HEAD',
       url: url,
       onload: async (r) => {
-        const elm = '( <span class="other">' + (r.status == 200 ? gena(url, '🐘') : 'Unavailable') + '</span> )'
-        document.querySelector('#docContent > div.versions > span.list').insertAdjacentHTML('afterbegin', elm)
+        if (r.status == 200) {
+          GM_log(url + ' is available.')
+          GM_registerMenuCommand('Move to EN', () => { GM_openInTab(url, { active: true, insert: true, setParent: true }) }, { accessKey: 'e' })
+          const elm = '( <span class="other">' + gena(url, '🐘') + '</span> )'
+          document.querySelector('#docContent > div.versions > span.list').insertAdjacentHTML('afterbegin', elm)
+        } else {
+          GM_log(url + ' is unavailable.')
+        }
       }
     })
   }
