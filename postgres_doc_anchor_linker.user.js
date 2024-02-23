@@ -16,9 +16,11 @@
 
 (() => {
     'use strict'
-    GM_addStyle('h3:hover {text-decoration: underline; cursor: pointer;}')
     const url = location.origin + location.pathname
-    const title = document.title
+    const title = document.querySelector('h2').innerText
+
+    // Decorate sub-section titles
+    GM_addStyle('h3:hover {text-decoration: underline; cursor: pointer;}')
     Array.from(document.querySelectorAll('div.sect2'))
         .forEach(e => {
             const hash = '#' + e.id
@@ -26,7 +28,21 @@
             const copyText = sectionTitle + ' | ' + title + ' - ' + url + hash
             e.querySelector('h3').addEventListener('click', () => {
                 GM_setClipboard(copyText)
-                GM_notification({ title: 'Copied!', text: copyText, timeout: 1500 })
+                GM_notification({ title: sectionTitle, text: url + hash, timeout: 1500 })
+            })
+        })
+
+    // Decorate variables
+    GM_addStyle('.variablelist dt:hover {text-decoration: underline; cursor: pointer;}')
+    Array.from(document.querySelectorAll('div.variablelist'))
+        .flatMap(e => Array.from(e.querySelectorAll('dt')))
+        .forEach(e => {
+            const hash = '#' + e.id
+            const varName = e.querySelector('.varname').innerText
+            const copyText = varName + ' - ' + url + hash
+            e.addEventListener('click', () => {
+                GM_setClipboard(copyText)
+                GM_notification({ title: varName, text: url + hash, timeout: 1500 })
             })
         })
 })()
