@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         Postgres doc anchor linker
+// @name         pg_anchorlink
 // @namespace    https://github.com/mutsuhiro6/tm-scripts
-// @version      1.1
-// @description  Cite anchor link of Postgres document.
+// @version      1.0
+// @description  Add anchorlinks to PostgreSQL documentations.
 // @author       mutsuhiro6
 // @updateURL    https://raw.githubusercontent.com/mutsuhiro6/tm-scripts/main/postgres_doc_anchor_linker.user.js
 // @downloadURL  https://raw.githubusercontent.com/mutsuhiro6/tm-scripts/main/postgres_doc_anchor_linker.user.js
@@ -29,20 +29,6 @@
             e.querySelector('h3').addEventListener('click', () => {
                 GM_setClipboard(copyText)
                 GM_notification({ title: sectionTitle, text: url + hash, timeout: 1500 })
-            })
-        })
-
-    // Decorate variables
-    GM_addStyle('.variablelist dt:hover {text-decoration: underline; cursor: pointer;}')
-    Array.from(document.querySelectorAll('div.variablelist'))
-        .flatMap(e => Array.from(e.querySelectorAll('dt')))
-        .forEach(e => {
-            const hash = '#' + e.id
-            const varName = e.querySelector('.varname').innerText
-            const copyText = varName + ' - ' + url + hash
-            e.addEventListener('click', () => {
-                GM_setClipboard(copyText)
-                GM_notification({ title: varName, text: url + hash, timeout: 1500 })
             })
         })
 })()
