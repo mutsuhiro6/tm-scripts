@@ -13,7 +13,7 @@
 
 (async () => {
   'use strict'
-  // URL is assumed like "https://www.postgresql.org/docs/14/history.html" or "https://www.postgresql.jp/document/14/html/history.html"
+  // URL is assumed like "https://www.postgresql.jp/docs/14/history.html"     
   // so path will be ['', 'docs', '14', 'history.html'] or ['', 'document', '14', 'html', 'history.html'].
   const path = window.location.pathname.split('/')
   // Avoid some error
