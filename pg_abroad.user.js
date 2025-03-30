@@ -5,8 +5,8 @@
 // @description  Add link to move PostgreSQL documents between Global and JP.
 // @author       mutsuhiro6
 // @icon         https://icons.duckduckgo.com/ip2/www.postgresql.org.ico
-// @updateURL    https://raw.githubusercontent.com/mutsuhiro6/tm-scripts/main/postgres_doc_jp_link.user.js
-// @downloadURL  https://raw.githubusercontent.com/mutsuhiro6/tm-scripts/main/postgres_doc_jp_link.user.js
+// @updateURL    https://raw.githubusercontent.com/mutsuhiro6/tm-scripts/main/pg_abroad.user.js
+// @downloadURL  https://raw.githubusercontent.com/mutsuhiro6/tm-scripts/main/pg_abroad.user.js
 // @match        https://www.postgresql.org/docs/*
 // @match        https://www.postgresql.jp/document/*
 // @grant        GM_registerMenuCommand

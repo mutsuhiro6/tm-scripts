@@ -1,12 +1,12 @@
 // ==UserScript==
 // @name         pg_redirect
 // @namespace    https://github.com/mutsuhiro6/tm-scripts
-// @version      1.0
+// @version      1.1
 // @description  Auto jump to version selectable PostgreSQL JP document.
 // @author       mutsuhiro6
 // @icon         https://icons.duckduckgo.com/ip2/www.postgresql.org.ico
-// @updateURL    https://raw.githubusercontent.com/mutsuhiro6/tm-scripts/main/postgres_doc_jp_link.user.js
-// @downloadURL  https://raw.githubusercontent.com/mutsuhiro6/tm-scripts/main/postgres_doc_jp_link.user.js
+// @updateURL    https://raw.githubusercontent.com/mutsuhiro6/tm-scripts/main/pg_redirect.user.js
+// @downloadURL  https://raw.githubusercontent.com/mutsuhiro6/tm-scripts/main/pg_redirect.user.js
 // @match        https://www.postgresql.jp/docs/*
 // @run-at       document-start
 // ==/UserScript==
